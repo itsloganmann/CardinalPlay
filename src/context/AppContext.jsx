@@ -6,27 +6,26 @@ const MOCK_USER = {
   id: 'usr_001',
   name: 'Aarnav',
   fullName: 'Aarnav Nagabhirava',
-  email: 'aarnav@stanford.edu',
+  email: 'aarnav@berkeley.edu',
   year: 'Sophomore',
   section: 'Section 104',
   sectionId: 104,
   coins: 2450,
   totalCoinsEarned: 8200,
   isInStadium: true,
-  avatarColor: '#8C1515',
+  avatarColor: '#003262',
   checkedIn: true,
 };
 
-// x,y are % in seating areas only (not on field): left 18–26%, right 74–82%, top 14–22%, bottom 78–86%
 const MOCK_FRIENDS = [
-  { id: 'f1', name: 'Karis Chen', section: 'Section 104', row: 12, seat: 8, x: 22, y: 18, online: true, avatarColor: '#B83A3A' },
-  { id: 'f2', name: 'Mahi Jariwala', section: 'Section 106', row: 5, seat: 15, x: 78, y: 18, online: true, avatarColor: '#D4AF37' },
-  { id: 'f3', name: 'Jordan Huang', section: 'Section 102', row: 20, seat: 3, x: 22, y: 82, online: true, avatarColor: '#6B0F0F' },
-  { id: 'f4', name: 'Zayd Patel', section: 'Section 108', row: 8, seat: 22, x: 78, y: 82, online: false, avatarColor: '#B08D57' },
-  { id: 'f5', name: 'Caroline Driscoll', section: 'Section 104', row: 14, seat: 5, x: 22, y: 50, online: true, avatarColor: '#E54545' },
-  { id: 'f6', name: 'Sonia Dholakia', section: 'Section 110', row: 3, seat: 18, x: 78, y: 50, online: true, avatarColor: '#8C1515' },
+  { id: 'f1', name: 'Karis Chen', section: 'Section 104', row: 12, seat: 8, x: 22, y: 18, online: true, avatarColor: '#1A73E8' },
+  { id: 'f2', name: 'Mahi Jariwala', section: 'Section 106', row: 5, seat: 15, x: 78, y: 18, online: true, avatarColor: '#FDB515' },
+  { id: 'f3', name: 'Jordan Huang', section: 'Section 102', row: 20, seat: 3, x: 22, y: 82, online: true, avatarColor: '#003262' },
+  { id: 'f4', name: 'Zayd Patel', section: 'Section 108', row: 8, seat: 22, x: 78, y: 82, online: false, avatarColor: '#C98E00' },
+  { id: 'f5', name: 'Caroline Driscoll', section: 'Section 104', row: 14, seat: 5, x: 22, y: 50, online: true, avatarColor: '#3D9AFF' },
+  { id: 'f6', name: 'Sonia Dholakia', section: 'Section 110', row: 3, seat: 18, x: 78, y: 50, online: true, avatarColor: '#003262' },
   { id: 'f7', name: 'Aakrisht Mehra', section: 'Section 104', row: 6, seat: 12, x: 50, y: 14, online: true, avatarColor: '#9C27B0' },
-  { id: 'f8', name: 'Sam Fisher', section: 'Section 112', row: 18, seat: 7, x: 50, y: 86, online: true, avatarColor: '#1976D2' },
+  { id: 'f8', name: 'Sam Fisher', section: 'Section 112', row: 18, seat: 7, x: 50, y: 86, online: true, avatarColor: '#1A73E8' },
   { id: 'f9', name: 'Andrew Luck', section: 'Section 106', row: 10, seat: 1, x: 26, y: 28, online: true, avatarColor: '#2E7D32' },
 ];
 
@@ -45,17 +44,17 @@ const MOCK_LEADERBOARD = [
 
 const MOCK_REWARDS = [
   { id: 'r1', name: 'Free Nachos & Drink', description: 'Redeem at any stadium concession stand', cost: 500, category: 'food', emoji: '🌮', available: true },
-  { id: 'r2', name: 'Cardinal T-Shirt', description: 'Official Stanford Athletics merch', cost: 1500, category: 'merch', emoji: '👕', available: true },
+  { id: 'r2', name: 'Cal Bears T-Shirt', description: 'Official Cal Athletics merch', cost: 1500, category: 'merch', emoji: '👕', available: true },
   { id: 'r3', name: 'Front Row Seats', description: 'Guaranteed front row for next home game', cost: 3000, category: 'seating', emoji: '🏟️', available: true },
   { id: 'r4', name: 'Free Pizza Slice', description: 'Any pizza vendor in the stadium', cost: 300, category: 'food', emoji: '🍕', available: true },
-  { id: 'r5', name: 'Stanford Cap', description: 'Embroidered Stanford Athletics cap', cost: 1200, category: 'merch', emoji: '🧢', available: true },
+  { id: 'r5', name: 'Cal Bears Cap', description: 'Embroidered Cal Athletics cap', cost: 1200, category: 'merch', emoji: '🧢', available: true },
   { id: 'r6', name: 'VIP Sideline Pass', description: 'Watch one quarter from the sideline', cost: 5000, category: 'experience', emoji: '⭐', available: true },
   { id: 'r7', name: 'Free Hot Dog Combo', description: 'Hot dog + fries + drink combo', cost: 400, category: 'food', emoji: '🌭', available: true },
   { id: 'r8', name: 'Signed Football', description: 'Football signed by the team', cost: 8000, category: 'merch', emoji: '🏈', available: true },
 ];
 
 const MOCK_POLLS = [
-  { id: 'p1', question: 'Will Stanford score on this drive?', optionA: 'Yes - Touchdown!', optionB: 'No - Defense holds', oddsA: 2.1, oddsB: 1.7, totalPool: 4500, votesA: 145, votesB: 98, status: 'active', timeLeft: 120, category: 'drive' },
+  { id: 'p1', question: 'Will Cal score on this drive?', optionA: 'Yes - Touchdown!', optionB: 'No - Defense holds', oddsA: 2.1, oddsB: 1.7, totalPool: 4500, votesA: 145, votesB: 98, status: 'active', timeLeft: 120, category: 'drive' },
   { id: 'p2', question: 'Total passing yards by halftime?', optionA: 'Over 150 yards', optionB: 'Under 150 yards', oddsA: 1.8, oddsB: 2.0, totalPool: 3200, votesA: 87, votesB: 112, status: 'active', timeLeft: 300, category: 'stats' },
   { id: 'p3', question: 'Next big play will be...', optionA: 'A run play 10+ yds', optionB: 'A pass play 15+ yds', oddsA: 2.5, oddsB: 1.5, totalPool: 2800, votesA: 56, votesB: 134, status: 'active', timeLeft: 60, category: 'play' },
   { id: 'p4', question: 'Will there be a turnover this quarter?', optionA: 'Yes', optionB: 'No', oddsA: 3.2, oddsB: 1.3, totalPool: 5100, votesA: 42, votesB: 201, status: 'active', timeLeft: 450, category: 'game' },
@@ -63,9 +62,9 @@ const MOCK_POLLS = [
 
 const MOCK_MESSAGES = {
   global: [
-    { id: 'm1', user: 'Karis Chen', text: 'Lets go Cardinal!! 🌲🔴', time: '2:34 PM', isOwn: false },
+    { id: 'm1', user: 'Karis Chen', text: 'Lets go Bears!! 🐻💛', time: '2:34 PM', isOwn: false },
     { id: 'm2', user: 'Mahi Jariwala', text: 'That last play was insane', time: '2:35 PM', isOwn: false },
-    { id: 'm3', user: 'You', text: 'Stanford by 20 today 💪', time: '2:36 PM', isOwn: true },
+    { id: 'm3', user: 'You', text: 'Cal by 20 today 💪', time: '2:36 PM', isOwn: true },
     { id: 'm4', user: 'Caroline Driscoll', text: 'Defense is locked in right now', time: '2:37 PM', isOwn: false },
     { id: 'm5', user: 'Sonia Dholakia', text: 'Anyone know if there are nachos left at stand 3?', time: '2:38 PM', isOwn: false },
     { id: 'm6', user: 'Jordan Huang', text: 'Just checked in, 5x coins lets gooo', time: '2:39 PM', isOwn: false },

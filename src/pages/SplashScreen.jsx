@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import StanfordTreeChibi from '../components/StanfordTreeChibi';
+import CalBearChibi from '../components/CalBearChibi';
 
 export default function SplashScreen({ onComplete }) {
   const [phase, setPhase] = useState(0);
@@ -13,17 +13,18 @@ export default function SplashScreen({ onComplete }) {
   }, [onComplete]);
 
   return (
-    <div className="absolute inset-0 bg-[#0D0D0D] flex items-center justify-center overflow-hidden z-50">
-      {/* Background radial pulses */}
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden z-50"
+      style={{ background: '#050505' }}>
+      {/* Background radial pulses — Cal Blue + Gold */}
       <motion.div
         className="absolute w-[600px] h-[600px] rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(140,21,21,0.3) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(0,50,98,0.3) 0%, transparent 70%)' }}
         animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
         className="absolute w-[400px] h-[400px] rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(253,181,21,0.15) 0%, transparent 70%)' }}
         animate={{ scale: [1.2, 0.8, 1.2], opacity: [0.2, 0.5, 0.2] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
       />
@@ -38,14 +39,14 @@ export default function SplashScreen({ onComplete }) {
             exit={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
             transition={{ duration: 0.6 }}
           >
-            {/* Stanford Tree / Cardinal icon */}
             <motion.div
               className="relative w-28 h-28 mb-8"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.2 }}
             >
-              <div className="w-full h-full rounded-3xl cardinal-gradient flex items-center justify-center cardinal-glow">
+              <div className="w-full h-full rounded-3xl flex items-center justify-center cal-glow"
+                style={{ background: 'linear-gradient(135deg, #003262, #1A73E8)' }}>
                 <motion.span
                   className="text-5xl font-black text-white"
                   initial={{ opacity: 0, y: 20 }}
@@ -56,7 +57,8 @@ export default function SplashScreen({ onComplete }) {
                 </motion.span>
               </div>
               <motion.div
-                className="absolute -inset-2 rounded-3xl border-2 border-cardinal/30"
+                className="absolute -inset-2 rounded-3xl"
+                style={{ border: '2px solid rgba(0,50,98,0.3)' }}
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.4 }}
@@ -69,17 +71,19 @@ export default function SplashScreen({ onComplete }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
             >
-              <h1 className="text-4xl font-black tracking-tight text-white">
-                Cardinal <span className="text-cardinal-light">Play</span>
+              <h1 className="text-4xl font-black tracking-tight text-white"
+                style={{ letterSpacing: '-0.04em' }}>
+                Cal <span style={{ color: '#FDB515' }}>Play</span>
               </h1>
               <motion.div
-                className="h-0.5 bg-gradient-to-r from-transparent via-cardinal to-transparent"
+                className="h-0.5"
+                style={{ background: 'linear-gradient(90deg, transparent, #003262, transparent)' }}
                 initial={{ width: 0 }}
                 animate={{ width: 200 }}
                 transition={{ delay: 0.9, duration: 0.8 }}
               />
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
-                <StanfordTreeChibi size={40} />
+                <CalBearChibi size={40} />
               </motion.div>
             </motion.div>
           </motion.div>
@@ -95,7 +99,7 @@ export default function SplashScreen({ onComplete }) {
             transition={{ duration: 0.6 }}
           >
             <motion.div className="mb-6" animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }}>
-              <StanfordTreeChibi size={72} />
+              <CalBearChibi size={72} />
             </motion.div>
 
             <motion.h2
@@ -107,15 +111,15 @@ export default function SplashScreen({ onComplete }) {
               Earn. Compete. Win.
             </motion.h2>
             <motion.p
-              className="text-white/50 text-base leading-relaxed max-w-xs"
+              className="text-base leading-relaxed max-w-xs"
+              style={{ color: '#A1A1AA' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              The ultimate gameday experience for Stanford students
+              The ultimate gameday experience for Cal students
             </motion.p>
 
-            {/* Animated dots */}
             <motion.div
               className="flex gap-2 mt-8"
               initial={{ opacity: 0 }}
@@ -125,7 +129,8 @@ export default function SplashScreen({ onComplete }) {
               {[0, 1, 2].map(i => (
                 <motion.div
                   key={i}
-                  className="w-2 h-2 rounded-full bg-cardinal"
+                  className="w-2 h-2 rounded-full"
+                  style={{ background: '#003262' }}
                   animate={{ scale: [1, 1.5, 1], opacity: [0.3, 1, 0.3] }}
                   transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
                 />
@@ -143,7 +148,8 @@ export default function SplashScreen({ onComplete }) {
             transition={{ duration: 0.4 }}
           >
             <motion.div
-              className="w-16 h-16 rounded-full border-2 border-cardinal/30 border-t-cardinal"
+              className="w-16 h-16 rounded-full"
+              style={{ border: '2px solid rgba(0,50,98,0.3)', borderTopColor: '#003262' }}
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
             />

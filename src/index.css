@@ -1,11 +1,42 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cardinal: #8C1515;
-  --color-cardinal-dark: #6B0F0F;
-  --color-cardinal-light: #B83A3A;
-  --color-gold: #B08D57;
-  --color-gold-light: #D4AF37;
+  /* ─── Background layers (OLED Dark) ─── */
+  --color-bg-primary: #050505;
+  --color-bg-surface: #121212;
+  --color-bg-elevated: #1A1A1A;
+
+  /* ─── Borders ─── */
+  --color-border-subtle: #1F1F1F;
+  --color-border-default: #333333;
+
+  /* ─── Cal Blue (Primary Brand) ─── */
+  --color-cal-blue: #003262;
+  --color-cal-blue-dark: #002147;
+  --color-cal-blue-light: #1A73E8;
+  --color-cal-blue-neon: #3D9AFF;
+
+  /* ─── Cal Gold (Primary Accent) ─── */
+  --color-cal-gold: #FDB515;
+  --color-cal-gold-light: #FFD54F;
+  --color-cal-gold-dark: #C98E00;
+
+  /* ─── Legacy compat aliases ─── */
+  --color-cardinal: #003262;
+  --color-cardinal-dark: #002147;
+  --color-cardinal-light: #1A73E8;
+
+  --color-gold: #FDB515;
+  --color-gold-light: #FFD54F;
+
+  /* ─── Text ─── */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #A1A1AA;
+  --color-text-muted: #52525B;
+
+  /* ─── Status ─── */
+  --color-success: #4ADE80;
+  --color-info: #60A5FA;
 }
 
 * {
@@ -19,15 +50,16 @@ html, body, #root {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background: #0A0A0A;
+  background: #050505;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #fff;
   display: flex;
   justify-content: center;
+  letter-spacing: -0.02em;
 }
 
 #root {
@@ -36,7 +68,7 @@ body {
   height: 100%;
   position: relative;
   overflow: hidden;
-  background: #0A0A0A;
+  background: #050505;
 }
 
 ::-webkit-scrollbar { display: none; }
@@ -47,12 +79,20 @@ input, textarea, select {
 }
 
 /* ─── Shared utility classes ────────────────────── */
-.cardinal-gradient {
-  background: linear-gradient(135deg, #8C1515 0%, #B83A3A 50%, #8C1515 100%);
+.cal-gradient {
+  background: linear-gradient(135deg, #003262 0%, #1A73E8 50%, #003262 100%);
 }
 
-.cardinal-glow {
-  box-shadow: 0 0 28px rgba(140,21,21,0.45), 0 0 60px rgba(140,21,21,0.15);
+.cal-gold-gradient {
+  background: linear-gradient(135deg, #FDB515 0%, #FFD54F 50%, #FDB515 100%);
+}
+
+.cal-glow {
+  box-shadow: 0 0 28px rgba(0,50,98,0.45), 0 0 60px rgba(0,50,98,0.15);
+}
+
+.cal-gold-glow {
+  box-shadow: 0 0 28px rgba(253,181,21,0.35), 0 0 60px rgba(253,181,21,0.1);
 }
 
 .glass {
@@ -63,14 +103,19 @@ input, textarea, select {
 }
 
 .glass-card {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.07);
+  background: #121212;
+  border: 1px solid #333333;
 }
 
 .gold-text {
-  background: linear-gradient(135deg, #D4AF37, #B08D57, #D4AF37);
+  background: linear-gradient(135deg, #FDB515, #FFD54F, #FDB515);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.blue-text {
+  background: linear-gradient(135deg, #1A73E8, #3D9AFF, #1A73E8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -105,4 +150,22 @@ input, textarea, select {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+/* ─── Marquee animation for WagerTicker ─── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* ─── Ping animation ─── */
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }

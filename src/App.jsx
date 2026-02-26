@@ -1,7 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useState } from 'react';
 import BottomNav from './components/BottomNav';
+import { ToastProvider } from './components/ui/Toast';
 import { AppProvider, useApp } from './context/AppContext';
+import useSimulatedLiveEvents from './hooks/useSimulatedLiveEvents';
 import AuthScreen from './pages/AuthScreen';
 import ChatScreen from './pages/ChatScreen';
 import FriendFinder from './pages/FriendFinder';
@@ -13,8 +15,13 @@ import SplashScreen from './pages/SplashScreen';
 const slide = {
   initial: { opacity: 0, y: 12 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.28, ease: 'easeOut' } },
-  exit:    { opacity: 0, y: -8,  transition: { duration: 0.18 } },
+  exit:    { opacity: 0, y: -8, transition: { duration: 0.18 } },
 };
+
+function LiveEventsFirer() {
+  useSimulatedLiveEvents();
+  return null;
+}
 
 function AppContent() {
   const { isAuthenticated } = useApp();
@@ -30,6 +37,7 @@ function AppContent() {
 
   return (
     <>
+      <LiveEventsFirer />
       <AnimatePresence mode="wait">
         {activeTab === 'home'    && <motion.div key="home"    className="absolute inset-0" {...slide}><HomeScreen    onNavigate={goTo}  /></motion.div>}
         {activeTab === 'finder'  && <motion.div key="finder"  className="absolute inset-0" {...slide}><FriendFinder  onBack={goHome}    /></motion.div>}
@@ -45,9 +53,11 @@ function AppContent() {
 export default function App() {
   return (
     <AppProvider>
-      <div style={{ position:'relative', width:'100%', height:'100%', background:'#0A0A0A', overflow:'hidden' }}>
-        <AppContent />
-      </div>
+      <ToastProvider>
+        <div style={{ position: 'relative', width: '100%', height: '100%', background: '#050505', overflow: 'hidden' }}>
+          <AppContent />
+        </div>
+      </ToastProvider>
     </AppProvider>
   );
 }

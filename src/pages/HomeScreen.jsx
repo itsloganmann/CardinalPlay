@@ -1,11 +1,16 @@
 import { motion } from 'framer-motion';
 import { CheckCircle2, ChevronRight, MapPin, MessageCircle, TrendingUp, Trophy, Users } from 'lucide-react';
-import CardinalCoin from '../components/CardinalCoin';
+import BearCoin from '../components/BearCoin';
+import FanEnergyChart from '../components/FanEnergyChart';
+import WagerTicker from '../components/WagerTicker';
+import AnimatedNumber from '../components/ui/AnimatedNumber';
+import Badge from '../components/ui/Badge';
+import Card from '../components/ui/Card';
 import { useApp } from '../context/AppContext';
 
 const stagger = {
   hidden: { opacity: 0 },
-  show:   { opacity: 1, transition: { staggerChildren: 0.07 } },
+  show:   { opacity: 1, transition: { staggerChildren: 0.06 } },
 };
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -13,10 +18,10 @@ const fadeUp = {
 };
 
 const FEATURES = [
-  { id:'finder',  title:'Friend Finder',  icon:MapPin,          iconColor:'#B83A3A', iconBg:'rgba(140,21,21,0.18)' },
-  { id:'chat',    title:'Live Chat',      icon:MessageCircle,   iconColor:'#60A5FA', iconBg:'rgba(96,165,250,0.15)' },
-  { id:'rewards', title:'Rewards',        icon:Trophy,          iconColor:'#D4AF37', iconBg:'rgba(212,175,55,0.15)' },
-  { id:'polls',   title:'Live Wagers',    icon:TrendingUp,      iconColor:'#34D399', iconBg:'rgba(52,211,153,0.15)' },
+  { id: 'finder',  title: 'Friend Finder', icon: MapPin,        iconColor: '#3D9AFF', iconBg: 'rgba(26,115,232,0.15)' },
+  { id: 'chat',    title: 'Live Chat',     icon: MessageCircle, iconColor: '#60A5FA', iconBg: 'rgba(96,165,250,0.12)' },
+  { id: 'rewards', title: 'Rewards',       icon: Trophy,        iconColor: '#FDB515', iconBg: 'rgba(253,181,21,0.12)' },
+  { id: 'polls',   title: 'Live Wagers',   icon: TrendingUp,    iconColor: '#4ADE80', iconBg: 'rgba(52,211,153,0.12)' },
 ];
 
 export default function HomeScreen({ onNavigate }) {
@@ -28,132 +33,158 @@ export default function HomeScreen({ onNavigate }) {
       <motion.div className="page-inner" variants={stagger} initial="hidden" animate="show">
 
         {/* ── Header ── */}
-        <motion.div variants={fadeUp} style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:24 }}>
+        <motion.div variants={fadeUp} style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24,
+        }}>
           <div>
-            <p style={{ fontSize:13, color:'rgba(255,255,255,0.45)', fontWeight:500, marginBottom:2 }}>Welcome back,</p>
-            <h1 style={{ fontSize:28, fontWeight:900, color:'#fff', letterSpacing:-0.5, lineHeight:1.1 }}>
-              {user.name} <span style={{ color:'#B83A3A' }}>👋</span>
+            <p style={{ fontSize: 13, color: '#A1A1AA', fontWeight: 500, marginBottom: 2 }}>Welcome back,</p>
+            <h1 style={{ fontSize: 28, fontWeight: 900, color: '#fff', letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+              {user.name} <span style={{ color: '#FDB515' }}>🐻</span>
             </h1>
           </div>
           <div style={{
-            width:48, height:48, borderRadius:'50%', flexShrink:0, marginLeft:12,
-            background:'linear-gradient(135deg,#8C1515,#B83A3A)',
-            display:'flex', alignItems:'center', justifyContent:'center',
-            fontSize:18, fontWeight:900, color:'#fff',
-            boxShadow:'0 0 16px rgba(140,21,21,0.4)',
+            width: 48, height: 48, borderRadius: '50%', flexShrink: 0, marginLeft: 12,
+            background: 'linear-gradient(135deg, #003262, #1A73E8)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 18, fontWeight: 900, color: '#fff',
+            boxShadow: '0 0 16px rgba(0,50,98,0.5)',
           }}>
             {user.name[0]}
           </div>
         </motion.div>
 
         {/* ── Live Game Banner ── */}
-        <motion.div variants={fadeUp} style={{
-          borderRadius:20, overflow:'hidden', marginBottom:20,
-          background:'linear-gradient(135deg,#8C1515,#B83A3A)',
-          boxShadow:'0 0 28px rgba(140,21,21,0.35)',
-        }}>
-          <div style={{ padding:'20px 20px' }}>
-            <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:10 }}>
-              <span style={{ position:'relative', display:'flex', width:10, height:10 }}>
-                <span style={{
-                  position:'absolute', inset:0, borderRadius:'50%', background:'#4ADE80',
-                  animation:'ping 1.5s cubic-bezier(0,0,0.2,1) infinite', opacity:0.75,
-                }} />
-                <span style={{ width:10, height:10, borderRadius:'50%', background:'#4ADE80', display:'block' }} />
-              </span>
-              <span style={{ fontSize:11, fontWeight:700, color:'rgba(255,255,255,0.85)', letterSpacing:1, textTransform:'uppercase' }}>
-                Live Now
-              </span>
+        <motion.div variants={fadeUp}>
+          <Card variant="gradient" style={{ marginBottom: 16, padding: '20px 20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+              <Badge variant="live">Live</Badge>
             </div>
-            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div>
-                <h2 style={{ fontSize:20, fontWeight:900, color:'#fff', lineHeight:1.2 }}>Stanford vs. Cal</h2>
-                <p style={{ fontSize:13, color:'rgba(255,255,255,0.6)', marginTop:3 }}>Q3 · 8:42 remaining</p>
+                <h2 style={{ fontSize: 22, fontWeight: 900, color: '#fff', lineHeight: 1.2, letterSpacing: '-0.03em' }}>
+                  Cal vs. Stanford
+                </h2>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', marginTop: 3 }}>Q3 · 8:42 remaining</p>
               </div>
-              <div style={{ textAlign:'right' }}>
-                <p style={{ fontSize:30, fontWeight:900, color:'#fff', lineHeight:1 }}>24–17</p>
-                <p style={{ fontSize:12, color:'rgba(255,255,255,0.5)', marginTop:3 }}>Stanford Stadium</p>
+              <div style={{ textAlign: 'right' }}>
+                <p style={{ fontSize: 32, fontWeight: 900, color: '#fff', lineHeight: 1, letterSpacing: '-0.03em' }}>
+                  24–17
+                </p>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 3 }}>
+                  Cal Memorial Stadium
+                </p>
               </div>
             </div>
-          </div>
+          </Card>
         </motion.div>
 
-        {/* ── Coins & Status ── */}
-        <motion.div variants={fadeUp} style={{ display:'flex', gap:12, marginBottom:16 }}>
+        {/* ── Coins & Status Row ── */}
+        <motion.div variants={fadeUp} style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
           {/* Coins */}
-          <div className="glass-card" style={{ flex:1, borderRadius:16, padding:16, display:'flex', alignItems:'center', gap:12 }}>
-            <CardinalCoin size={40} />
+          <Card style={{ flex: 1, padding: 16, display: 'flex', alignItems: 'center', gap: 12 }}>
+            <BearCoin size={40} />
             <div>
-              <p style={{ fontSize:11, color:'rgba(255,255,255,0.4)', fontWeight:600, marginBottom:2 }}>Your Coins</p>
-              <p style={{ fontSize:22, fontWeight:900, color:'#fff', lineHeight:1 }}>{user.coins.toLocaleString()}</p>
+              <p style={{ fontSize: 11, color: '#A1A1AA', fontWeight: 600, marginBottom: 2, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                Bear Coins
+              </p>
+              <AnimatedNumber
+                value={user.coins}
+                style={{ fontSize: 22, fontWeight: 900, color: '#FDB515', lineHeight: 1, display: 'block' }}
+              />
             </div>
-          </div>
+          </Card>
           {/* Status */}
-          <div className="glass-card" style={{ flex:1, borderRadius:16, padding:16, display:'flex', alignItems:'center', gap:12 }}>
+          <Card style={{ flex: 1, padding: 16, display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{
-              width:40, height:40, borderRadius:12, flexShrink:0,
-              background: user.isInStadium ? 'rgba(74,222,128,0.15)' : 'rgba(255,255,255,0.07)',
-              display:'flex', alignItems:'center', justifyContent:'center',
+              width: 40, height: 40, borderRadius: 12, flexShrink: 0,
+              background: user.isInStadium ? 'rgba(74,222,128,0.12)' : 'rgba(255,255,255,0.07)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               {user.isInStadium
                 ? <CheckCircle2 size={20} color="#4ADE80" />
-                : <MapPin size={20} color="rgba(255,255,255,0.3)" />}
+                : <MapPin size={20} color="#52525B" />}
             </div>
             <div>
-              <p style={{ fontSize:11, color:'rgba(255,255,255,0.4)', fontWeight:600, marginBottom:2 }}>Status</p>
-              <p style={{ fontSize:14, fontWeight:700, color: user.isInStadium ? '#4ADE80' : 'rgba(255,255,255,0.5)', lineHeight:1 }}>
+              <p style={{ fontSize: 11, color: '#A1A1AA', fontWeight: 600, marginBottom: 2, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                Status
+              </p>
+              <p style={{
+                fontSize: 14, fontWeight: 700, lineHeight: 1,
+                color: user.isInStadium ? '#4ADE80' : '#52525B',
+              }}>
                 {user.isInStadium ? 'In Stadium · 5×' : 'Remote'}
               </p>
             </div>
-          </div>
+          </Card>
+        </motion.div>
+
+        {/* ── Fan Energy Chart (Whoop-style) ── */}
+        <motion.div variants={fadeUp} style={{ marginBottom: 16 }}>
+          <FanEnergyChart />
+        </motion.div>
+
+        {/* ── Wager Ticker ── */}
+        <motion.div variants={fadeUp} style={{ marginBottom: 16 }}>
+          <WagerTicker />
         </motion.div>
 
         {/* ── Friends Row ── */}
-        <motion.div variants={fadeUp}
-          className="glass-card"
-          style={{ borderRadius:16, padding:16, marginBottom:24, display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer' }}
-          onClick={() => onNavigate('finder')}
-          whileTap={{ scale:0.98 }}>
-          <div style={{ display:'flex', alignItems:'center', gap:14 }}>
-            <div style={{ width:42, height:42, borderRadius:12, background:'rgba(140,21,21,0.18)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-              <Users size={20} color="#B83A3A" />
+        <motion.div variants={fadeUp} style={{ marginBottom: 24 }}>
+          <Card
+            onClick={() => onNavigate('finder')}
+            style={{
+              padding: 16, display: 'flex', alignItems: 'center',
+              justifyContent: 'space-between', cursor: 'pointer',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <div style={{
+                width: 42, height: 42, borderRadius: 12,
+                background: 'rgba(26,115,232,0.12)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              }}>
+                <Users size={20} color="#3D9AFF" />
+              </div>
+              <div>
+                <p style={{ fontSize: 15, fontWeight: 700, color: '#fff', marginBottom: 2 }}>
+                  {onlineFriends} Friends at the Game
+                </p>
+                <p style={{ fontSize: 12, color: '#A1A1AA' }}>Tap to find them in the stadium</p>
+              </div>
             </div>
-            <div>
-              <p style={{ fontSize:15, fontWeight:700, color:'#fff', marginBottom:2 }}>{onlineFriends} Friends at the Game</p>
-              <p style={{ fontSize:12, color:'rgba(255,255,255,0.4)' }}>Tap to find them in the stadium</p>
-            </div>
-          </div>
-          <ChevronRight size={20} color="rgba(255,255,255,0.25)" />
+            <ChevronRight size={20} color="#52525B" />
+          </Card>
         </motion.div>
 
         {/* ── Feature Grid ── */}
-        <p style={{ fontSize:11, fontWeight:700, color:'rgba(255,255,255,0.35)', letterSpacing:1, textTransform:'uppercase', marginBottom:14 }}>
+        <p style={{
+          fontSize: 11, fontWeight: 700, color: '#52525B',
+          letterSpacing: 1, textTransform: 'uppercase', marginBottom: 14,
+        }}>
           Features
         </p>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           {FEATURES.map(({ id, title, icon: Icon, iconColor, iconBg }) => (
-            <motion.button
-              key={id}
-              variants={fadeUp}
-              className="glass-card"
-              onClick={() => onNavigate(id)}
-              whileTap={{ scale:0.96 }}
-              style={{
-                borderRadius:16, padding:18, textAlign:'left',
-                background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)',
-                cursor:'pointer',
-              }}>
-              <div style={{ width:44, height:44, borderRadius:12, background:iconBg, display:'flex', alignItems:'center', justifyContent:'center', marginBottom:14 }}>
-                <Icon size={22} color={iconColor} />
-              </div>
-              <p style={{ fontSize:15, fontWeight:700, color:'#fff', marginBottom:4 }}>{title}</p>
-              <p style={{ fontSize:12, color:'rgba(255,255,255,0.35)' }}>
-                {id === 'finder'  && `${onlineFriends} nearby`}
-                {id === 'chat'    && 'Game chat buzzing'}
-                {id === 'rewards' && 'New rewards live'}
-                {id === 'polls'   && '4 active wagers'}
-              </p>
-            </motion.button>
+            <motion.div key={id} variants={fadeUp}>
+              <Card
+                onClick={() => onNavigate(id)}
+                style={{ padding: 18, cursor: 'pointer' }}
+              >
+                <div style={{
+                  width: 44, height: 44, borderRadius: 12, background: iconBg,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14,
+                }}>
+                  <Icon size={22} color={iconColor} />
+                </div>
+                <p style={{ fontSize: 15, fontWeight: 700, color: '#fff', marginBottom: 4 }}>{title}</p>
+                <p style={{ fontSize: 12, color: '#A1A1AA' }}>
+                  {id === 'finder'  && `${onlineFriends} nearby`}
+                  {id === 'chat'    && 'Game chat buzzing'}
+                  {id === 'rewards' && 'New rewards live'}
+                  {id === 'polls'   && '4 active wagers'}
+                </p>
+              </Card>
+            </motion.div>
           ))}
         </div>
 

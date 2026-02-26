@@ -18,14 +18,14 @@ export default function BottomNav({ activeTab, onTabChange }) {
         left: 0,
         right: 0,
         zIndex: 100,
-        background: 'rgba(10,10,10,0.92)',
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
-        borderTop: '1px solid rgba(255,255,255,0.07)',
+        background: 'rgba(5,5,5,0.80)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
         paddingBottom: 'env(safe-area-inset-bottom, 0px)',
       }}
     >
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-around', height: 64 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', height: 64 }}>
         {TABS.map(({ id, label, Icon }) => {
           const active = activeTab === id;
           return (
@@ -55,7 +55,8 @@ export default function BottomNav({ activeTab, onTabChange }) {
                     width: 32,
                     height: 3,
                     borderRadius: 2,
-                    background: 'linear-gradient(135deg,#8C1515,#B83A3A)',
+                    background: 'linear-gradient(135deg, #FDB515, #FFD54F)',
+                    boxShadow: '0 0 8px rgba(253,181,21,0.4)',
                   }}
                   transition={{ type: 'spring', stiffness: 500, damping: 35 }}
                 />
@@ -63,12 +64,12 @@ export default function BottomNav({ activeTab, onTabChange }) {
               <Icon
                 size={22}
                 strokeWidth={active ? 2.5 : 1.8}
-                color={active ? '#B83A3A' : 'rgba(255,255,255,0.35)'}
+                color={active ? '#FDB515' : 'rgba(255,255,255,0.30)'}
               />
               <span style={{
                 fontSize: 10,
                 fontWeight: active ? 700 : 500,
-                color: active ? '#B83A3A' : 'rgba(255,255,255,0.35)',
+                color: active ? '#FDB515' : 'rgba(255,255,255,0.30)',
                 letterSpacing: 0.2,
               }}>
                 {label}
